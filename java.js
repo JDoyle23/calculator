@@ -30,7 +30,7 @@ console.log(division(4,2));
 //create variables for number, operator and another number
 let firstNumber = [];
 let secondNumber = [];
-let operator = '';
+let operator = [];
 
 //create new function operate that takes the above + calls operator on the numbers
 const operate = firstNumber => operator => secondNumber => {switch(operator) {
@@ -87,8 +87,9 @@ function convertToString(arr) {
 }
 
 function declareOperator(symbol) {
-  let operator = symbol;
-  return operator;
+  operator = symbol;
+  let convertedOperator = operator.join("")
+  return convertedOperator;
 }
 
 function returnToDefault() {
@@ -106,6 +107,11 @@ function clearFirstNumber() {
 function clearSecondNumber() {
   secondNumber.length = 0;
   return secondNumber;
+}
+
+function clearOperator() {
+  operator.length = 0;
+  return operator;
 }
 
 
@@ -142,9 +148,9 @@ three.addEventListener('click', function () {
   });
 
 divide.addEventListener('click', function () {
-  appendtoDisplay("%");
+  appendtoDisplay("/");
   convertToTrue();
-  declareOperator("%");
+  createArray(operator,"/");
 });
 
 four.addEventListener('click', function () {
@@ -177,6 +183,7 @@ six.addEventListener('click', function () {
 times.addEventListener('click', function () {
     appendtoDisplay("*");
     convertToTrue();
+    createArray(operator,"*");
   });
 
 seven.addEventListener('click', function () {
@@ -209,6 +216,7 @@ nine.addEventListener('click', function () {
 minus.addEventListener('click', function () {
     appendtoDisplay("-");
     convertToTrue();
+    createArray(operator,"-");
   });
   
 zero.addEventListener('click', function () {
@@ -222,14 +230,18 @@ zero.addEventListener('click', function () {
     
 equals.addEventListener('click', function () {
       appendtoDisplay("=");
-      let num1 = convertToString(firstNumber);
-      let num2 = convertToString(secondNumber);
-      operate(num1)(operator)(num2);
+      let stringNum1 = convertToString(firstNumber);
+      let num1 = stringNum1 * 1;
+      let stringNum2 = convertToString(secondNumber);
+      let num2 = stringNum2 * 1;
+      let op = convertToString(operator);
+      console.log(operate(num1)(op)(num2));
     });
   
 add.addEventListener('click', function () {
       appendtoDisplay("+");
       convertToTrue();
+      createArray(operator,"+");
     });
 
 clear.addEventListener('click', function () {
@@ -237,8 +249,10 @@ clear.addEventListener('click', function () {
     returnToDefault();
     clearFirstNumber();
     clearSecondNumber();
+    clearOperator();
 })
 
 console.log(firstNumber);
 console.log(secondNumber);
 console.log(buttons);
+console.log(operator);

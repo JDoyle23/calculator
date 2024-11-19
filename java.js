@@ -3,30 +3,21 @@ const addition = function (num1, num2) {
     let result = num1 + num2;
     return result;
 }
-
-console.log(addition(14,16));
 //subtract function
 const subtraction = function(num1, num2) {
     let result = num1 - num2;
     return result;
 }
-
-console.log(subtraction(13,7));
 //multiply function
 const multiplication = function(num1, num2) {
     let result = num1 * num2;
     return result;
 }
-
-console.log(multiplication(13,7));
 //divide function
 const division = function (num1, num2) {
     let result = num1/num2;
     return result;
 }
-
-console.log(division(4,2));
-
 //create variables for number, operator and another number
 let firstNumber = [];
 let secondNumber = [];
@@ -40,10 +31,7 @@ const operate = firstNumber => operator => secondNumber => {switch(operator) {
     case '*': return multiplication(firstNumber,secondNumber);
     default: return 'Invalid operation'
   }}
-
-  console.log(operate(12)('+')(8));
-
-  //create a variable to get the numbers by ID.
+//create a variable to get the numbers by ID & initialise arrayTrigger to create numbers
 const one = document.getElementById("1");
 const two = document.getElementById("2");
 const three = document.getElementById("3");
@@ -64,60 +52,52 @@ const display = document.getElementById("display");
 const buttons = document.querySelectorAll(".gridbox");
 let arrayTrigger = 0;
 
+//function to append number or symbol to display
 function appendtoDisplay(input) {
     display.innerHTML += input;
 }
 
+//function to clear full display -> will be on AC button
 function clearDisplay() {
     display.innerHTML = "";
 }
 
+//create array function to make each number
 function createArray(arr, num) {
     arr.push(num);
     return arr;
 }
 
+//trigger for second array to start being made -> on each symbol
 function convertToTrue() {
   arrayTrigger += 1;
 }
 
+//function to convert operator array into a string for reading in operate
 function convertToString(arr) {
   let convertedArray = arr.join("")
   return convertedArray;
 }
 
-function declareOperator(symbol) {
-  operator = symbol;
-  let convertedOperator = operator.join("")
-  return convertedOperator;
+function convertToNumber(arr1) {
+  let stringArray = arr1.join("");
+  let number = stringArray * 1;
+  return number;
 }
 
+//function to return the array trigger to 0
 function returnToDefault() {
   arrayTrigger = 0;
   return arrayTrigger;
 }
 
-console.log(arrayTrigger);
-
-function clearFirstNumber() {
-  firstNumber.length = 0;
-  return firstNumber;
+//function to clear the variable arrays 
+function clearArray(arr) {
+  arr.length = 0;
+  return arr;
 }
 
-function clearSecondNumber() {
-  secondNumber.length = 0;
-  return secondNumber;
-}
-
-function clearOperator() {
-  operator.length = 0;
-  return operator;
-}
-
-
-console.log(convertToString([1,2,3,4]))
-
-//add event listener to show the number on the display s
+//add event listener to show the number on the display & create variables
 one.addEventListener('click', function () {
   appendtoDisplay("1");
   if (arrayTrigger === 0) {
@@ -229,13 +209,12 @@ zero.addEventListener('click', function () {
     });
     
 equals.addEventListener('click', function () {
-      appendtoDisplay("=");
-      let stringNum1 = convertToString(firstNumber);
-      let num1 = stringNum1 * 1;
-      let stringNum2 = convertToString(secondNumber);
-      let num2 = stringNum2 * 1;
+      clearDisplay();
+      let num1 = convertToNumber(firstNumber);
+      let num2 = convertToNumber(secondNumber);
       let op = convertToString(operator);
-      console.log(operate(num1)(op)(num2));
+      let result = operate(num1)(op)(num2);
+      appendtoDisplay(result);
     });
   
 add.addEventListener('click', function () {
@@ -247,12 +226,7 @@ add.addEventListener('click', function () {
 clear.addEventListener('click', function () {
     clearDisplay();
     returnToDefault();
-    clearFirstNumber();
-    clearSecondNumber();
-    clearOperator();
+    clearArray(firstNumber);
+    clearArray(secondNumber);
+    clearArray(operator);
 })
-
-console.log(firstNumber);
-console.log(secondNumber);
-console.log(buttons);
-console.log(operator);

@@ -23,9 +23,7 @@
     margin-top: 20px;
     margin-bottom: 15px;
     border-radius: 25px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    text-align: center;
     font-size: 25px;
 }
 
@@ -40,7 +38,10 @@
     flex-direction: row;
 }
 
-.gridbox {
+.gridbox,
+.gridbox-operator,
+.clear,
+.equals {
     background-color: black;
     height: 60px;
     width: 60px;
